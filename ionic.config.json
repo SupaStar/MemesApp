@@ -1,0 +1,7 @@
+{
+  "name": "Plantillas y memes",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "ionic-angular"
+}

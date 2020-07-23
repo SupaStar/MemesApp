@@ -1,0 +1,48 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Memes</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-refresher (ionRefresh)="refrescar($event)">
+    <ion-refresher-content
+      pullingIcon="arrow-dropdown"
+      pullingText="Jala para recargar"
+      refreshingSpinner="circles"
+      refreshingText="Cargando...">
+    </ion-refresher-content>
+  </ion-refresher>
+  <ion-searchbar placeholder="Ingresa palabras relacionadas a un meme" [(ngModel)]="busqueda.palabra"
+                 (ionInput)="buscarMemes()"></ion-searchbar>
+  <ion-item>
+    <ion-label>Filtrar</ion-label>
+    <ion-select (ionChange)="buscarMemes()" [(ngModel)]="orden" interface="popover">
+      <ion-option value="1">Fecha mas nuevo a antiguo</ion-option>
+      <ion-option value="2">Fecha mas antiguo a nuevo</ion-option>
+      <ion-option value="3">Puntuacion mayor a menor</ion-option>
+      <ion-option value="4">Puntuacion menor a mayor</ion-option>
+    </ion-select>
+  </ion-item>
+  <ion-list>
+    <ion-card *ngFor="let meme of memes">
+      <ion-card (click)="verMeme(meme.id)">
+        <ion-label>Titulo: {{meme.titulo}}</ion-label>
+        <ion-badge color="primary" padding-end>Calificacion: {{meme.promedio}}</ion-badge>
+        <ion-col class="click-img col">
+          <ion-item class="imagen">
+            <img [src]="ruta+meme.ruta" imageViewer/>
+          </ion-item>
+        </ion-col>
+        <span *ngIf="meme.descripcion!==''">Descripcion: {{meme.descripcion}}</span>
+        <p align="left">Fecha: {{meme.created_at|date :"yyyy-MM-dd"}}</p>
+      </ion-card>
+    </ion-card>
+  </ion-list>
+  <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+    <ion-infinite-scroll-content
+      loadingSpinner="bubbles"
+      loadingText="Cargando mas memes...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-content>

@@ -1,0 +1,6 @@
+<ion-tabs selectedIndex="1">
+  <ion-tab [root]="subir" tabTitle="Subir meme" tabIcon="add-circle"></ion-tab>
+  <ion-tab [root]="principal" tabTitle="Ver Memes" tabIcon="home" ></ion-tab>
+  <ion-tab [root]="perfil" tabTitle="Perfil" tabIcon="contacts"></ion-tab>
+  <ion-tab tabTitle="Cerrar sesion" tabIcon="exit" (ionSelect)="cerrarSesion()"></ion-tab>
+</ion-tabs>
